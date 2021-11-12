@@ -12,8 +12,8 @@ date = datetime.datetime.now()
 mon = date.strftime('%m')
 urllib3.disable_warnings()
 
-p = "/automation/Nexpose-Automation/windows/report/report"
-base_url = "https://sdeplapp015:3780/api/3/reports/"
+p = "Path where report should be downloaded"
+base_url = "BASE-URL"
 
 class Nexpose:
     """
@@ -31,7 +31,7 @@ class Nexpose:
         )
         self.logger = logging.getLogger()
         self.session = requests.session()
-        self.headers = {'Authorization': 'Basic dW5peGluc2lnaHR2bTp1bml4QGluc2lnaHR2bQ=='}
+        self.headers = {'Authorization': 'Basic encoded username and password goes here'}
 
     def request_reports(self, method,jsonbody=None):
         """
@@ -121,7 +121,7 @@ if __name__ == '__main__':
     id1,id2 = (y['resources'][4]['id'],y['resources'][5]['id'])
     gen_mon = date.strftime('%b')
     Repid_list = [id1,id2]
-    l = sorted(glob('/automation/Nexpose-Automation/windows/report/report*.csv'))
+    l = sorted(glob(p+/report*.csv'))
     month_list = [ time.ctime(os.path.getmtime(i)).split()[1] for i in l ]
     month_set = set(month_list)
     if len(l) == 2 and len(month_set) == 1 and month_set.pop() == gen_mon:
